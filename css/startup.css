@@ -1,0 +1,81 @@
+@font-face {
+  font-family: 'cairo';
+  src: url("../fonts/cairo.ttf");
+}
+
+* {
+  font-family: 'cairo';
+  font-size: 16px;
+}
+
+body {
+  background-color: #11162d;
+}
+
+#main {
+  text-align: center;
+  padding: 20px;
+}
+
+#htdocs-path, #other-prjs-path {
+  min-width: 260px;
+  width: 355px;
+  margin: 0 auto;
+  padding: 10px 10px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.browse-txt {
+  color: #fff;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+[type='text'] {
+  background-color: #474b5d;
+  color: #dde7ff;
+  min-width: 280px;
+  height: 26px;
+  outline: none;
+  padding: 1px 5px;
+  border: 1px #3b3b3b solid;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+.browse {
+  background-color: #4512e0;
+  color: white;
+  height: 30px;
+  outline: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  margin-left: -1px;
+  border: 1px #3b3b3b solid;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.browse:hover {
+  background-color: #656ed6;
+}
+
+.browse > span {
+  position: relative;
+  top: -3px;
+  margin-top: 5px;
+}
+
+.next {
+  margin-top: 20px;
+  padding: 0 12px;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+/*# sourceMappingURL=startup.css.map */

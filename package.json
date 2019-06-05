@@ -1,0 +1,30 @@
+{
+  "name": "xampp-htdocs-manager",
+  "version": "0.0.1-alpha",
+  "description": "An electron app to manage replacement of multiple website projects on the htdocs folder of xampp app",
+  "main": "launch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/electron/dist/electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnory0/xampp-htdocs-manager.git"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "xampp",
+    "electron"
+  ],
+  "author": "Hocine Abdellatif Houari <houarihocine99@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dnory0/xampp-htdocs-manager/issues"
+  },
+  "homepage": "https://github.com/dnory0/xampp-htdocs-manager#readme",
+  "dependencies": {
+    "@types/electron": "^1.6.10",
+    "electron": "^5.0.2"
+  }
+}
