@@ -1,7 +1,8 @@
 "use strict";
 exports.__esModule = true;
 var electron_1 = require("electron");
-var fse = require('fs-extra');
+var fse = require("fs-extra");
+// const fse = require('fs-extra');
 var mainWin;
 /**
  * creates a window and adds the default events to it (closed for now)
@@ -19,7 +20,9 @@ function createWindow(_a) {
     win.on('close', function () { win = null; });
     return win;
 }
-// function 
+function loadMain() {
+    mainWin.loadFile('main.html');
+}
 electron_1.app.on("ready", function () {
     mainWin = createWindow({ width: 640, height: 430 });
     fse.readFile('appSettings.json', 'utf8', function (err, data) {
@@ -27,12 +30,11 @@ electron_1.app.on("ready", function () {
             throw err;
         var appSettings = JSON.parse(data);
         if (appSettings['htdocsPath'] == null) {
-            mainWin.loadFile('main.html');
+            mainWin.loadFile('setup.html');
+            electron_1.ipcMain.on('load-main', function () { loadMain(); });
         }
-        else {
-            // that's the real next phase
-            // ipcMain.on('load-main')
-        }
+        else
+            loadMain();
     });
     // args[0] refers to browseType
     // args[1] refers to the value that existed previously on the textfiled where id = browserType

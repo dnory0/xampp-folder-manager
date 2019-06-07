@@ -1,5 +1,9 @@
-var ipcRenderer = require('electron').ipcRenderer;
-var fs = require('fs');
+"use strict";
+exports.__esModule = true;
+// const {ipcRenderer} = require ('electron');
+var electron_1 = require("electron");
+var fs = require("fs");
+// fs.
 /**
  * Sends dialog box request to ipcMain with two arguments:
  * - browseType.
@@ -8,13 +12,13 @@ var fs = require('fs');
  */
 function browse(browseType) {
     var element = document.getElementById(browseType);
-    ipcRenderer.send("dialog-request", browseType, element.value);
+    electron_1.ipcRenderer.send("dialog-request", browseType, element.value);
 }
 /**
  * gets reply from ipcMain with the browseType and the path
  * changes the text field where id == browseType with the new path
  */
-ipcRenderer.on('dialog-replay', function (event) {
+electron_1.ipcRenderer.on('dialog-replay', function (event) {
     var args = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         args[_i - 1] = arguments[_i];
@@ -47,7 +51,7 @@ function htdocsChosen() {
                 fs.writeFile('appSettings.json', JSON.stringify(appSettings), 'utf8', function (err) {
                     if (err)
                         throw err;
-                    document.getElementById('setup').innerHTML = 'Hi';
+                    electron_1.ipcRenderer.send('load-main');
                 });
             });
         }

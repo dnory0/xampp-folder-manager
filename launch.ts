@@ -1,5 +1,6 @@
 import { BrowserWindow, app, ipcMain, dialog } from "electron";
-const fse = require('fs-extra');
+import * as fse from 'fs-extra';
+// const fse = require('fs-extra');
 
 let mainWin: BrowserWindow;
 
@@ -20,7 +21,9 @@ function createWindow({width, height}: {width: number, height: number}): Browser
   return win;
 }
 
-// function 
+function loadMain() {
+  mainWin.loadFile('main.html');
+}
 
 app.on("ready", () => {
   mainWin = createWindow({width: 640, height: 430});
@@ -29,11 +32,9 @@ app.on("ready", () => {
     if (err) throw err;
     const appSettings: object = JSON.parse(data);
     if (appSettings['htdocsPath'] == null) {
-      mainWin.loadFile('main.html');    
-    } else {
-      // that's the real next phase
-      // ipcMain.on('load-main')
-    }
+      mainWin.loadFile('setup.html');
+      ipcMain.on('load-main', () => {loadMain();});
+    } else loadMain();
   });
   // args[0] refers to browseType
   // args[1] refers to the value that existed previously on the textfiled where id = browserType
@@ -51,7 +52,8 @@ app.on("ready", () => {
     });
     // if user clicked cancel on dialog box returns previous path (args[1])
     event.reply('dialog-replay', 
-      args[0], path == null? args[1] : path, path == null? false : true);
+      args[0], path == null? args[1] : path, path == null? false : true
+    );
   });
 });
 

@@ -1,1 +1,42 @@
-/* No CSS *//*# sourceMappingURL=main.css.map */
+@font-face {
+  font-family: 'cairo';
+  src: url("../fonts/cairo.ttf");
+}
+
+* {
+  font-family: 'cairo';
+  font-size: 16px;
+}
+
+body {
+  background-color: #11162d;
+}
+
+#htdocs {
+  padding: 5px;
+  background-color: #faffae;
+  height: 50px;
+}
+
+#htdocs-favicon {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-user-drag: none;
+  float: left;
+  margin-right: 10px;
+  height: 50px;
+}
+
+#other-prjs {
+  margin-top: 8px;
+  background-color: white;
+  height: calc(100vh - 84px);
+  overflow-y: auto;
+}
+
+#other-prjs header {
+  background-color: #dfdfdf;
+}
+/*# sourceMappingURL=main.css.map */

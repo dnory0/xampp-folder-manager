@@ -1,5 +1,8 @@
-const {ipcRenderer} = require ('electron');
-const fs = require('fs');
+// const {ipcRenderer} = require ('electron');
+import {ipcRenderer} from 'electron';
+import * as fs  from 'fs';
+
+// fs.
 
 /**
  * Sends dialog box request to ipcMain with two arguments:
@@ -44,7 +47,7 @@ function htdocsChosen() {
           fs.writeFile('appSettings.json', JSON.stringify(appSettings),
             'utf8', (err: Error) => {
             if (err) throw err;
-            document.getElementById('setup').innerHTML = 'Hi'
+            ipcRenderer.send('load-main');
           })
         })
       }
