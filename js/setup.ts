@@ -1,8 +1,7 @@
-// const {ipcRenderer} = require ('electron');
 import {ipcRenderer} from 'electron';
 import * as fs  from 'fs';
 
-// fs.
+
 
 /**
  * Sends dialog box request to ipcMain with two arguments:
@@ -12,18 +11,12 @@ import * as fs  from 'fs';
  */
 function browse(browseType: string) {
   const element: any = document.getElementById(browseType);
-  ipcRenderer.send(`dialog-request`, browseType, element.value);
+  ipcRenderer.send(`dialog-request`, browseType, 
+    element.value !== ''? element.value : (process.platform === 'win32'? 
+    'c:\\xampp\\htdocs' : (process.platform === 'linux'?
+    '/opt/lampp/htdocs' : null))
+  );
 }
-
-/**
- * gets reply from ipcMain with the browseType and the path
- * changes the text field where id == browseType with the new path
- */
-ipcRenderer.on('dialog-replay', (event: any, ...args: string[]) => {
-  const element: any = document.getElementById(args[0]);
-  element.value = args[1];
-  if (args[2]) element.style.backgroundColor = '#474b5d';
-});
 
 /**
  * launchs when next btn clicked, it checks if htdocs path is valid or not
@@ -32,24 +25,36 @@ ipcRenderer.on('dialog-replay', (event: any, ...args: string[]) => {
  * - if(path is valid)
  *    - it continues
  * - else
- *    - it turns background-color of htdocs textfield to red.
+ *    - it turns background-color of htdocsPath textfield to red.
  */
 function htdocsChosen() {
-  let txtFiled: any = document.getElementById('htdocs');
-  fs.access(txtFiled.value, fs.constants.F_OK, (err: Error) => {
+  let txtField: any = document.getElementById('htdocs');
+  fs.access(txtField.value, fs.constants.F_OK, (err: Error) => {
     if (err)
       document.getElementById('htdocs').style.backgroundColor = '#f55';
       else {
-        fs.readFile('appSettings.json', 'utf8', (err: Error, data: string) => {
+        let appSettings = {};
+        appSettings['htdocs'] = {};
+        appSettings['htdocs']['path'] = txtField.value;
+        appSettings['htdocs']['name'] = "htdocs";
+        fs.writeFile('appSettings.json', JSON.stringify(appSettings),
+          'utf8', (err: Error) => {
           if (err) throw err;
-          let appSettings = JSON.parse(data);
-          appSettings['htdocsPath'] = txtFiled.value;
-          fs.writeFile('appSettings.json', JSON.stringify(appSettings),
-            'utf8', (err: Error) => {
-            if (err) throw err;
-            ipcRenderer.send('load-main');
-          })
+          ipcRenderer.send('load-main');
         })
       }
   });
 }
+
+/**
+ * gets reply from ipcMain with the browseType and the path
+ * changes the text field where id == browseType with the new path
+ */
+ipcRenderer.on('dialog-reply', (event: any, ...args: string[]) => {
+  if(args[0] != 'htdocs') return;
+  const element: any = document.getElementById(args[0]);
+  if (args[1] != null) {
+    element.value = args[1];
+    element.style.backgroundColor = '#474b5d';
+  }
+});

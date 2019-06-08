@@ -38,5 +38,30 @@ body {
 
 #other-prjs header {
   background-color: #dfdfdf;
+  text-align: center;
+}
+
+#other-prjs .other-prj {
+  padding: 5px;
+  height: 30px;
+}
+
+#other-prjs .other-prj:hover {
+  background-color: #ebebeb;
+}
+
+#other-prjs .other-prj .other-prj-favicon {
+  height: 30px;
+  width: 30px;
+  float: left;
+  margin-right: 8px;
+  -webkit-user-drag: none;
+}
+
+#other-prjs .other-prj .other-prj-title {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 /*# sourceMappingURL=main.css.map */

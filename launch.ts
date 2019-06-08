@@ -1,12 +1,11 @@
-import { BrowserWindow, app, ipcMain, dialog } from "electron";
+import { BrowserWindow, app, ipcMain, dialog, Menu, shell } from "electron";
 import * as fse from 'fs-extra';
-// const fse = require('fs-extra');
 
 let mainWin: BrowserWindow;
 
 /**
  * creates a window and adds the default events to it (closed for now)
- * @param param0 takes width and height of the window (respectively)
+ * @param properties takes width and height of the window (respectively)
  */
 function createWindow({width, height}: {width: number, height: number}): BrowserWindow {
   let win = new BrowserWindow({
@@ -27,33 +26,33 @@ function loadMain() {
 
 app.on("ready", () => {
   mainWin = createWindow({width: 640, height: 430});
+  mainWin.setMenuBarVisibility(false);
   
   fse.readFile('appSettings.json', 'utf8', (err: Error, data: string) => {
     if (err) throw err;
-    const appSettings: object = JSON.parse(data);
-    if (appSettings['htdocsPath'] == null) {
+    const appSettings = data != ''? JSON.parse(data): '';
+    if (appSettings == '' || appSettings['htdocs'] == null) {
       mainWin.loadFile('setup.html');
       ipcMain.on('load-main', () => {loadMain();});
     } else loadMain();
   });
+
+  //  ipc Main Part:
   // args[0] refers to browseType
   // args[1] refers to the value that existed previously on the textfiled where id = browserType
   ipcMain.on("dialog-request", (event: any, ...args: string[]) => {
-    let defaultPath: string;
-    if (args[0] === 'htdocs')
-      defaultPath = args[1] !== ''? args[1] : (process.platform === 'win32'? 
-      'c:\\xampp\\htdocs' : (process.platform === 'linux'?
-      '/opt/lampp/htdocs' : null));
     let path = dialog.showOpenDialog(mainWin, {
       title: 'htdocs Path',
-      defaultPath: defaultPath,
+      defaultPath: args[0] == 'other-prjs'? app.getPath('desktop') : args[1],
       buttonLabel: 'choose',
       properties: ["openDirectory"]
     });
     // if user clicked cancel on dialog box returns previous path (args[1])
-    event.reply('dialog-replay', 
-      args[0], path == null? args[1] : path, path == null? false : true
-    );
+    event.reply('dialog-reply', args[0], path);
   });
+  ipcMain.on('open-in-explorer', (event: any, ...args: string[]) => {
+    shell.openItem(args[0]);
+  });
+
 });
 

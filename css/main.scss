@@ -16,6 +16,7 @@ body {
   padding: 5px;
   background-color: #faffae;
   height: 50px;
+  // width: calc(100% - 60px);
 }
 
 #htdocs-favicon {
@@ -31,7 +32,29 @@ body {
   background-color: white;
   height: calc(100vh - 84px);
   overflow-y: auto;
+  // width: calc(100% - 50px);
   header {
-    background-color: #dfdfdf
+    background-color: #dfdfdf;
+    text-align: center;
   }
+  .other-prj {
+    padding: 5px;
+    height: 30px;
+
+    &:hover {
+      background-color: #ebebeb;
+    }
+
+    .other-prj-favicon {
+      height: 30px;
+      width: 30px;
+      float: left;
+      margin-right: 8px;
+      -webkit-user-drag: none;
+    }
+    .other-prj-title {
+      user-select: none;
+    }
+  }
+
 }
