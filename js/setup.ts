@@ -2,7 +2,6 @@ import {ipcRenderer} from 'electron';
 import * as fs  from 'fs';
 
 
-
 /**
  * Sends dialog box request to ipcMain with two arguments:
  * - browseType.

@@ -1,4 +1,4 @@
-import { BrowserWindow, app, ipcMain, dialog, Menu, shell } from "electron";
+import { BrowserWindow, app, ipcMain, dialog, shell } from "electron";
 import * as fse from 'fs-extra';
 
 let mainWin: BrowserWindow;
@@ -20,21 +20,19 @@ function createWindow({width, height}: {width: number, height: number}): Browser
   return win;
 }
 
-function loadMain() {
-  mainWin.loadFile('main.html');
-}
 
 app.on("ready", () => {
   mainWin = createWindow({width: 640, height: 430});
-  mainWin.setMenuBarVisibility(false);
-  
-  fse.readFile('appSettings.json', 'utf8', (err: Error, data: string) => {
+  // mainWin.setMenuBarVisibility(false);
+  // mainWin.removeMenu();
+  mainWin.setAutoHideMenuBar(true);
+  fse.readFile('appSettings.json', {encoding: 'utf8', flag: 'a+'}, (err: NodeJS.ErrnoException, data: Buffer) => {
     if (err) throw err;
-    const appSettings = data != ''? JSON.parse(data): '';
+    const appSettings = data.length != 0? JSON.parse(data.toString()): '';
     if (appSettings == '' || appSettings['htdocs'] == null) {
       mainWin.loadFile('setup.html');
-      ipcMain.on('load-main', () => {loadMain();});
-    } else loadMain();
+      ipcMain.on('load-main', () => {mainWin.loadFile('main.html');});
+    } else mainWin.loadFile('main.html');
   });
 
   //  ipc Main Part:
@@ -55,4 +53,3 @@ app.on("ready", () => {
   });
 
 });
-

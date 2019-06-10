@@ -19,22 +19,21 @@ function createWindow(_a) {
     win.on('close', function () { win = null; });
     return win;
 }
-function loadMain() {
-    mainWin.loadFile('main.html');
-}
 electron_1.app.on("ready", function () {
     mainWin = createWindow({ width: 640, height: 430 });
-    mainWin.setMenuBarVisibility(false);
-    fse.readFile('appSettings.json', 'utf8', function (err, data) {
+    // mainWin.setMenuBarVisibility(false);
+    // mainWin.removeMenu();
+    mainWin.setAutoHideMenuBar(true);
+    fse.readFile('appSettings.json', { encoding: 'utf8', flag: 'a+' }, function (err, data) {
         if (err)
             throw err;
-        var appSettings = data != '' ? JSON.parse(data) : '';
+        var appSettings = data.length != 0 ? JSON.parse(data.toString()) : '';
         if (appSettings == '' || appSettings['htdocs'] == null) {
             mainWin.loadFile('setup.html');
-            electron_1.ipcMain.on('load-main', function () { loadMain(); });
+            electron_1.ipcMain.on('load-main', function () { mainWin.loadFile('main.html'); });
         }
         else
-            loadMain();
+            mainWin.loadFile('main.html');
     });
     //  ipc Main Part:
     // args[0] refers to browseType

@@ -1,4 +1,4 @@
-import {ipcRenderer, remote, app} from 'electron';
+import {ipcRenderer, remote} from 'electron';
 const {Menu, MenuItem} = remote;
 import * as fs from 'fs';
 import * as path from 'path';
