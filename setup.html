@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/setup.css">
+</head>
+
+<body>
+  <div id="setup">
+    <div class="browse-txt">Specify path to htdocs folder:</div>
+    <div id="htdocs-path">
+      <input type="text" id="htdocs">
+      <button class="browse" onclick="browse('htdocs');"><span>browse</span></button>
+    </div>
+    <div id="next">
+      <button class="browse next" onclick="htdocsChosen();"><span>next</span></button>
+    </div>
+  </div>
+  <script>var exports = {};</script>
+  <script src="js/setup.js"></script>
+</body>
+
+</html>

@@ -1,32 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/startup.css">
+  <title>XAMPP Htdocs Manager</title>
+  <link rel="stylesheet" href="css/main.css">
 </head>
-
 <body>
   <div id="main">
-    <div class="browse-txt">Specify path to htdocs folder:</div>
-    <div id="htdocs-path">
-      <input type="text" id="htdocs">
-      <button class="browse" onclick="browse('htdocs');"><span>browse</span></button>
+    <div id="htdocs">
+      <img id="htdocs-favicon">
+      <div id="htdocs-title"></div>
     </div>
-    <div class="browse-txt">Specify path to put other projects:</div>
-    <div id="other-prjs-path">
-      <input type="text" id="other-prjs">
-      <button class="browse" onclick="browse('other-prjs');"><span>browse</span></button>
-    </div>
-    <div id="next">
-      <button class="browse next"><span>next</span></button>
+    <div id="other-prjs">
+      <header>Other projects</header>
     </div>
   </div>
-  <script src="js/dialog.js"></script>
-  <!-- <script>
-    import {ipcRenderer} from 'electron';
-  </script> -->
+  <script>var exports = {};</script>
+  <script src="js/main.js"></script>
 </body>
-
 </html>

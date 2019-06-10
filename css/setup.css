@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'cairo';
-  src: url('../fonts/cairo.ttf')
+  src: url("../fonts/cairo.ttf");
 }
 
 * {
@@ -12,23 +12,29 @@ body {
   background-color: #11162d;
 }
 
-#main {
+#setup {
+  margin-top: calc(50vh - 90px);
   text-align: center;
   padding: 20px;
 }
 
 #htdocs-path, #other-prjs-path {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
   min-width: 260px;
   width: 355px;
-  margin: 0 auto;
   padding: 10px 10px 20px;
-  display:flex;
 }
 
 .browse-txt {
-  color: #fff;
-  user-select: none;
-} 
+  color: #dde7ff;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
 
 [type='text'] {
   background-color: #474b5d;
@@ -47,20 +53,24 @@ body {
   color: white;
   height: 30px;
   outline: none;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   margin-left: -1px;
   border: 1px #3b3b3b solid;
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
-  &:hover {
-    background-color: #656ed6;
-  }
 }
 
-.browse>span {
+.browse:hover {
+  background-color: #656ed6;
+}
+
+.browse > span {
+  padding: 0 6px;
   position: relative;
   top: -3px;
-  margin-top: 5px;
 }
 
 .next {
@@ -69,15 +79,4 @@ body {
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
 }
-
-// input[type="text"] {
-//   width: 200px;
-//   height: 20px;
-//   padding-right: 50px;
-// }
-
-// input[type="button"] {
-//   margin-left: -50px;
-//   height: 20px;
-//   width: 50px;
-// }
+/*# sourceMappingURL=setup.css.map */

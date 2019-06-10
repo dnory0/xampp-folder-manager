@@ -63,3 +63,7 @@ typings/
 # my added ones
 menubar.js
 notes.md
+appSettings.json
+js/setup.js
+js/main.js
+launch.js
