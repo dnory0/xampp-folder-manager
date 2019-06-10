@@ -64,5 +64,6 @@ typings/
 menubar.js
 notes.md
 appSettings.json
-js/*.js
-*.js
+js/setup.js
+js/main.js
+launch.js

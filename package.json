@@ -1,6 +1,6 @@
 {
   "name": "xampp-htdocs-manager",
-  "version": "0.0.1-beta-dev3",
+  "version": "0.1.0",
   "description": "An electron app to manage replacement of multiple website projects on the htdocs folder of xampp app",
   "main": "launch.js",
   "scripts": {
